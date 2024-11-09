@@ -1,0 +1,75 @@
+/* EditArticle.css */
+.edit-article {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-article h2,
+  .edit-article h4 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .edit-article p {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  input,
+  textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+  
+  .update-button {
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .update-button:hover {
+    background-color: #45a049;
+  }
+  
+  .cancel-button {
+    padding: 10px 15px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #d32f2f;
+  }
+  

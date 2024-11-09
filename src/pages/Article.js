@@ -1,42 +1,42 @@
-import { useNavigate, useParams } from "react-router-dom"
-import {getDoc, doc} from 'firebase/firestore';
-import {db} from '../firebase/config'
-import { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
+
+import './Article.css';
 
 export default function Article() {
-  const { urlId } = useParams()
-  const navigate = useNavigate()
-
-  console.log("id: " + urlId)
-
+  const { urlId } = useParams();
+  const navigate = useNavigate();
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
-    const ref = doc(db, 'articles', urlId);
-    getDoc(ref)
-      .then((snapshot)=>{        
-        setArticle(snapshot.data());
-      })
+    const fetchArticle = async () => {
+      const refDoc = doc(db, 'articles', urlId);
+      const docSnap = await getDoc(refDoc);
+      if (docSnap.exists()) {
+        setArticle(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    };
+    fetchArticle();
+  }, [urlId]);
 
-  },[])  
-  
-
-  // if (!article) {
-  //   setTimeout(() => {
-  //     navigate('/')
-  //   }, 2000)
-  // }
+  if (!article) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div>
-      {!article && <p>No records found!</p>}
-      {article && (
-        <div key={article.id}>
-          <h2>{article.title}</h2>
-          <p>By {article.author}</p>
-          <p>{article.description}</p>
-        </div>
-      )}
+    <div className="article-page">
+      <h2>{article.title}</h2>
+      <p><strong>Author:</strong> {article.author}</p>
+      <p>{article.description}</p>
+
+      {/* Update button */}
+      <button onClick={() => navigate(`/edit/${urlId}`)} className="update-button">
+        Update
+      </button>
     </div>
-  )
+  );
 }
